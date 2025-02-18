@@ -17,7 +17,7 @@ namespace DrivingLicenseManagement_V1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FRM_InfoPerson(1023));
+            Application.Run(new PeopleMain());
         }
     }
 }

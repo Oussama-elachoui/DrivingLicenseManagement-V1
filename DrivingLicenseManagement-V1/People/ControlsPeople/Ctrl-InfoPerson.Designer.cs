@@ -107,7 +107,7 @@
             this.groupBox1.Size = new System.Drawing.Size(817, 273);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Person Information";
+            this.groupBox1.Text = "sss";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // llEditPersonInfo
@@ -120,6 +120,7 @@
             this.llEditPersonInfo.TabIndex = 139;
             this.llEditPersonInfo.TabStop = true;
             this.llEditPersonInfo.Text = "Edit Person Info";
+            this.llEditPersonInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llEditPersonInfo_LinkClicked);
             // 
             // lblCountry
             // 

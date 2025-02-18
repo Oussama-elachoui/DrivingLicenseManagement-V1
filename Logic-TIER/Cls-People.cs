@@ -31,6 +31,7 @@ namespace Logic_TIER
         public int NationalityCountryID { set; get; }
 
         private string _ImagePath;
+        public Cls_Countries Cls_Countries;
 
         public string ImagePath
         {
@@ -75,6 +76,7 @@ namespace Logic_TIER
             this.Email = Email;
             this.NationalityCountryID = NationalityCountryID;
             this.ImagePath = ImagePath;
+            this.Cls_Countries= Cls_Countries.FindById(NationalityCountryID);
             Mode = enMode.Update;
         }
 

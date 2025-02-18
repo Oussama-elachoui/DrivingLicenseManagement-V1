@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -51,6 +52,11 @@ namespace Logic_TIER
                 return null;
             }
 
+        }
+
+        public static DataTable GetAllcountries()
+        {
+            return DATA_TIER.SQL_Countries.GetTable();
         }
 
 

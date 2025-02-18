@@ -1,4 +1,5 @@
-﻿using Logic_TIER;
+﻿using DrivingLicenseManagement_V1.People;
+using Logic_TIER;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -88,6 +89,80 @@ namespace DrivingLicenseManagement_V1
                 dgvPeople.Columns[10].Width = 170;
 
             }
+        }
+
+        private void btnAddPerson_Click(object sender, EventArgs e)
+        {
+            FRM_ADD_UPDATE fRM_ADD_UPDATE = new FRM_ADD_UPDATE();
+            fRM_ADD_UPDATE.ShowDialog();
+        }
+
+        private void txtFilterValue_TextChanged(object sender, EventArgs e)
+        {
+            string FilterColumn = "";
+
+            switch (cbFilterBy.Text)
+            {
+                case "Person ID":
+                    FilterColumn = "PersonID";
+                    break;
+
+                case "National No.":
+                    FilterColumn = "NationalNo";
+                    break;
+
+                case "First Name":
+                    FilterColumn = "FirstName";
+                    break;
+
+                case "Second Name":
+                    FilterColumn = "SecondName";
+                    break;
+
+                case "Third Name":
+                    FilterColumn = "ThirdName";
+                    break;
+
+                case "Last Name":
+                    FilterColumn = "LastName";
+                    break;
+
+                case "Nationality":
+                    FilterColumn = "CountryName";
+                    break;
+
+                case "Gendor":
+                    FilterColumn = "GendorCaption";
+                    break;
+
+                case "Phone":
+                    FilterColumn = "Phone";
+                    break;
+
+                case "Email":
+                    FilterColumn = "Email";
+                    break;
+
+                default:
+                    FilterColumn = "None";
+                    break;
+
+            }
+
+            if (txtFilterValue.Text.Trim() == "" || FilterColumn == "None")
+            {
+                _dtPeople.DefaultView.RowFilter = "";
+                lblRecordsCount.Text = dgvPeople.Rows.Count.ToString();
+                return;
+            }
+
+            if (FilterColumn == "PersonID")
+
+                _dtPeople.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, txtFilterValue.Text.Trim());
+            else
+                _dtPeople.DefaultView.RowFilter = string.Format("[{0}] LIKE '{1}%'", FilterColumn, txtFilterValue.Text.Trim());
+
+            lblRecordsCount.Text = dgvPeople.Rows.Count.ToString();
         }
     }
 }

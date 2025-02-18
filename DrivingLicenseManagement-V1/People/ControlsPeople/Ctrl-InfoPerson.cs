@@ -39,7 +39,6 @@ namespace DrivingLicenseManagement_V1.People.ControlsPeople
 
         private void Ctrl_InfoPerson_Load(object sender, EventArgs e)
         {
-
         }
         private void _LoadPersonImage()
         {
@@ -84,7 +83,6 @@ namespace DrivingLicenseManagement_V1.People.ControlsPeople
         public void FillInfo(int PersonID)
         {
             _Person = ClsPeople.GetPersonByID(PersonID);
-            _PersonID = _Person.PersonID;
 
 
             if (_Person == null)
@@ -92,22 +90,31 @@ namespace DrivingLicenseManagement_V1.People.ControlsPeople
                 MessageBox.Show("No person found with the given PersonID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            _PersonID = _Person.PersonID;
 
             _FillPersonInfo();
         }
         public void FillInfo(string NationalNo)
         {
             _Person = ClsPeople.GetPersonByNatinalityNo(NationalNo);
-            _PersonID = _Person.PersonID;
 
 
             if (_Person == null)
             {
-                MessageBox.Show("No person found with the given PersonID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No person found with the given NationalNo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            _PersonID = _Person.PersonID;
+
 
             _FillPersonInfo();
+        }
+
+        private void llEditPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FRM_ADD_UPDATE frm = new FRM_ADD_UPDATE(_PersonID);
+            frm.ShowDialog();
+
         }
 
     }

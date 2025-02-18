@@ -52,17 +52,35 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="People\ControlsPeople\Ctrl-InfoPeersonByfilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="People\ControlsPeople\Ctrl-InfoPeersonByfilter.Designer.cs">
+      <DependentUpon>Ctrl-InfoPeersonByfilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="People\ControlsPeople\Ctrl-InfoPerson.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="People\ControlsPeople\Ctrl-InfoPerson.Designer.cs">
       <DependentUpon>Ctrl-InfoPerson.cs</DependentUpon>
     </Compile>
+    <Compile Include="People\FRM-ADD&amp;UPDATE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="People\FRM-ADD&amp;UPDATE.Designer.cs">
+      <DependentUpon>FRM-ADD&amp;UPDATE.cs</DependentUpon>
+    </Compile>
     <Compile Include="People\FRM-InfoPerson.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="People\FRM-InfoPerson.Designer.cs">
       <DependentUpon>FRM-InfoPerson.cs</DependentUpon>
+    </Compile>
+    <Compile Include="People\FRM-InfoPersonByfilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="People\FRM-InfoPersonByfilter.Designer.cs">
+      <DependentUpon>FRM-InfoPersonByfilter.cs</DependentUpon>
     </Compile>
     <Compile Include="People\PeopleMain.cs">
       <SubType>Form</SubType>
@@ -72,11 +90,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="People\ControlsPeople\Ctrl-InfoPeersonByfilter.resx">
+      <DependentUpon>Ctrl-InfoPeersonByfilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="People\ControlsPeople\Ctrl-InfoPerson.resx">
       <DependentUpon>Ctrl-InfoPerson.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="People\FRM-ADD&amp;UPDATE.resx">
+      <DependentUpon>FRM-ADD&amp;UPDATE.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="People\FRM-InfoPerson.resx">
       <DependentUpon>FRM-InfoPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\FRM-InfoPersonByfilter.resx">
+      <DependentUpon>FRM-InfoPersonByfilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="People\PeopleMain.resx">
       <DependentUpon>PeopleMain.cs</DependentUpon>
