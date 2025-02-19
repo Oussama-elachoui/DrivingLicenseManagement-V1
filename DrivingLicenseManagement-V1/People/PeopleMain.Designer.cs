@@ -193,35 +193,39 @@
             this.dELETEToolStripMenuItem,
             this.iNFOToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(113, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 114);
             // 
             // eDITToolStripMenuItem
             // 
             this.eDITToolStripMenuItem.Image = global::DrivingLicenseManagement_V1.Properties.Resources.edit_32;
             this.eDITToolStripMenuItem.Name = "eDITToolStripMenuItem";
-            this.eDITToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.eDITToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.eDITToolStripMenuItem.Text = "EDIT";
+            this.eDITToolStripMenuItem.Click += new System.EventHandler(this.eDITToolStripMenuItem_Click);
             // 
             // dELETEToolStripMenuItem
             // 
             this.dELETEToolStripMenuItem.Image = global::DrivingLicenseManagement_V1.Properties.Resources.Delete_32;
             this.dELETEToolStripMenuItem.Name = "dELETEToolStripMenuItem";
-            this.dELETEToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.dELETEToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.dELETEToolStripMenuItem.Text = "DELETE";
+            this.dELETEToolStripMenuItem.Click += new System.EventHandler(this.dELETEToolStripMenuItem_Click);
             // 
             // iNFOToolStripMenuItem
             // 
             this.iNFOToolStripMenuItem.Image = global::DrivingLicenseManagement_V1.Properties.Resources.Applications_64;
             this.iNFOToolStripMenuItem.Name = "iNFOToolStripMenuItem";
-            this.iNFOToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.iNFOToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.iNFOToolStripMenuItem.Text = "INFO";
+            this.iNFOToolStripMenuItem.Click += new System.EventHandler(this.iNFOToolStripMenuItem_Click);
             // 
             // aDDToolStripMenuItem
             // 
             this.aDDToolStripMenuItem.Image = global::DrivingLicenseManagement_V1.Properties.Resources.Add_Person_40;
             this.aDDToolStripMenuItem.Name = "aDDToolStripMenuItem";
-            this.aDDToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.aDDToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aDDToolStripMenuItem.Text = "ADD";
+            this.aDDToolStripMenuItem.Click += new System.EventHandler(this.aDDToolStripMenuItem_Click);
             // 
             // PeopleMain
             // 

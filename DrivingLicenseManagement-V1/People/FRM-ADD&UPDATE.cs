@@ -240,7 +240,6 @@ namespace DrivingLicenseManagement_V1.People
 
             if (!_HandlePersonImage())
                 return;
-            _Person.PersonID = int.Parse(lblPersonID.Text);
             _Person.FirstName = txtFirstName.Text;
             _Person.SecondName = txtSecondName.Text;
             _Person.ThirdName = txtThirdName.Text;

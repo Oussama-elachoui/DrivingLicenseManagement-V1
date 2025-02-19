@@ -164,5 +164,44 @@ namespace DrivingLicenseManagement_V1
 
             lblRecordsCount.Text = dgvPeople.Rows.Count.ToString();
         }
+
+        private void aDDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FRM_ADD_UPDATE fRM_ADD_UPDATE = new FRM_ADD_UPDATE();
+            fRM_ADD_UPDATE.ShowDialog();
+            _RefreshPeoplList();
+        }
+
+        private void eDITToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FRM_ADD_UPDATE fRM_ADD_UPDATE = new FRM_ADD_UPDATE((int)dgvPeople.CurrentRow.Cells[0].Value);
+            fRM_ADD_UPDATE.ShowDialog();
+            _RefreshPeoplList();
+        }
+
+        private void dELETEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to delete Person [" + dgvPeople.CurrentRow.Cells[0].Value + "]", "Confirm Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+
+            {
+
+                //Perform Delele and refresh
+                if (ClsPeople.DeletePerson((int)dgvPeople.CurrentRow.Cells[0].Value))
+                {
+                    MessageBox.Show("Person Deleted Successfully.", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _RefreshPeoplList();
+                }
+
+                else
+                    MessageBox.Show("Person was not deleted because it has data linked to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
+
+        private void iNFOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FRM_InfoPerson FRM  = new FRM_InfoPerson((int)dgvPeople.CurrentRow.Cells[0].Value);
+            FRM.ShowDialog();
+        }
     }
 }
