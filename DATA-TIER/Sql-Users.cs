@@ -107,7 +107,7 @@ namespace DATA_TIER
         {
             DataTable Dt = new DataTable();
             SqlConnection connection = new SqlConnection(StringConnection.connectionString);
-            string query = "Select Fullname=FirstName+' '+SecondName+' '+ThirdName+' '+LastName , UserName,Email , Phone , case  WHEN Gendor=0 then 'Male' when Gendor=1 then 'Female' end as Gendor ,CountryName,IsActive\r\nfrom People inner join Countries on Countries.CountryID=People.NationalityCountryID inner join Users on Users.PersonID=People.PersonID;";
+            string query = " SELECT  Users.UserID, Users.PersonID,FullName = People.FirstName + ' ' + People.SecondName + ' ' + ISNULL( People.ThirdName,'') +' ' + People.LastName, Users.UserName, Users.IsActive  FROM  Users INNER JOIN People ON Users.PersonID = People.PersonID;";
             SqlCommand command = new SqlCommand(query, connection);
 
 
@@ -146,7 +146,9 @@ namespace DATA_TIER
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                if (reader.HasRows)
+                
+
+                if (reader.Read())
                 {
                     PeronsId = (int)reader["PersonID"];
                     UserName = (string)reader["UserName"];
@@ -154,6 +156,8 @@ namespace DATA_TIER
                     isActive = (bool)reader["IsActive"];
                     isExist = true;
                 }
+
+                reader.Close();
 
             }
             catch (Exception ex)

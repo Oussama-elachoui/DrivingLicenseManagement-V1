@@ -90,6 +90,36 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Users\Controls\Ctrl-UserInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Users\Controls\Ctrl-UserInfo.Designer.cs">
+      <DependentUpon>Ctrl-UserInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Users\FRM-ADD_UPDATE_USERS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users\FRM-ADD_UPDATE_USERS.Designer.cs">
+      <DependentUpon>FRM-ADD_UPDATE_USERS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Users\FRM-ChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users\FRM-ChangePassword.Designer.cs">
+      <DependentUpon>FRM-ChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Frm-List.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users\Frm-List.Designer.cs">
+      <DependentUpon>Frm-List.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Frm-UserInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users\Frm-UserInfo.Designer.cs">
+      <DependentUpon>Frm-UserInfo.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="People\ControlsPeople\Ctrl-InfoPeersonByfilter.resx">
       <DependentUpon>Ctrl-InfoPeersonByfilter.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,6 +148,21 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Users\Controls\Ctrl-UserInfo.resx">
+      <DependentUpon>Ctrl-UserInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\FRM-ADD_UPDATE_USERS.resx">
+      <DependentUpon>FRM-ADD_UPDATE_USERS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\FRM-ChangePassword.resx">
+      <DependentUpon>FRM-ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\Frm-List.resx">
+      <DependentUpon>Frm-List.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\Frm-UserInfo.resx">
+      <DependentUpon>Frm-UserInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

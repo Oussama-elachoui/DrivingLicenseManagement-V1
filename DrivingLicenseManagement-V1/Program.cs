@@ -1,4 +1,5 @@
 ﻿using DrivingLicenseManagement_V1.People;
+using DrivingLicenseManagement_V1.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace DrivingLicenseManagement_V1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PeopleMain());
+            Application.Run(new FRM_ChangePassword(1));
         }
     }
 }

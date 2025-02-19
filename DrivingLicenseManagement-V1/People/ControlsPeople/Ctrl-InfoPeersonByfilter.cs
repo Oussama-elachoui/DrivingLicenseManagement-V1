@@ -51,6 +51,11 @@ namespace DrivingLicenseManagement_V1.People.ControlsPeople
             }
         }
 
+
+        public void FillInfo(int personId)
+        {
+            ctrl_InfoPerson1.FillInfo(personId);
+        }
         public Ctrl_InfoPeersonByfilter()
         {
             InitializeComponent();

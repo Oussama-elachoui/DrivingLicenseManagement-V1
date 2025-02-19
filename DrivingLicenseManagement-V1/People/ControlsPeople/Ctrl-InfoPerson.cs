@@ -15,7 +15,7 @@ namespace DrivingLicenseManagement_V1.People.ControlsPeople
 {
     public partial class Ctrl_InfoPerson : UserControl
     {
-        private int _PersonID;
+        private int _PersonID= -1;
         private ClsPeople _Person;
         public int PersonID
         {
