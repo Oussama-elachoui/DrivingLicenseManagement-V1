@@ -12,9 +12,11 @@ namespace DrivingLicenseManagement_V1.Users
 {
     public partial class Frm_UserInfo : Form
     {
+        private int _userId = -1;
         public Frm_UserInfo(int UserID)
         {
             InitializeComponent();
+            _userId = UserID;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -24,7 +26,7 @@ namespace DrivingLicenseManagement_V1.Users
 
         private void Frm_UserInfo_Load(object sender, EventArgs e)
         {
-            ctrl_UserInfo1.FiLLByUserId(1);
+            ctrl_UserInfo1.FiLLByUserId(_userId);
         }
     }
 }

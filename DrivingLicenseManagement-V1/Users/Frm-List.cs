@@ -115,5 +115,53 @@ namespace DrivingLicenseManagement_V1.Users
             else
                 DataTable.DefaultView.RowFilter = string.Format("[{0}] LIKE '{1}%'", FilterColumn, txtFilterValue.Text.Trim());
         }
+
+        private void aDDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           FRM_ADD_UPDATE_USERS FRM = new FRM_ADD_UPDATE_USERS();
+            FRM.ShowDialog();
+            Refresh();
+        }
+
+        private void eDITToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FRM_ADD_UPDATE_USERS FRM = new FRM_ADD_UPDATE_USERS((int)dgvUsers.CurrentRow.Cells[0].Value);
+            FRM.ShowDialog();
+            Refresh();
+        }
+
+        private void dELETEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to delete Person [" + dgvUsers.CurrentRow.Cells[0].Value + "]", "Confirm Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+
+            {
+
+                //Perform Delele and refresh
+                if (Cls_Users.DeleteUser(((int)dgvUsers.CurrentRow.Cells[0].Value))) ;
+                {
+                    MessageBox.Show("Person Deleted Successfully.", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Refresh();
+                }
+                
+            }
+
+            else
+                MessageBox.Show("Person was not deleted because it has data linked to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            
+        }
+
+        private void iNFOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           Frm_UserInfo frm_UserInfo = new Frm_UserInfo((int)dgvUsers.CurrentRow.Cells[0].Value);
+            frm_UserInfo.ShowDialog();
+        }
+
+        private void btnAddUser_Click(object sender, EventArgs e)
+        {
+            FRM_ADD_UPDATE_USERS FRM = new FRM_ADD_UPDATE_USERS();
+            FRM.ShowDialog();
+            Refresh();
+        }
     }
 }
