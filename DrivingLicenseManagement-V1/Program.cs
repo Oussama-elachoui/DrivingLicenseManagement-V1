@@ -1,4 +1,6 @@
-﻿using DrivingLicenseManagement_V1.People;
+﻿using DrivingLicenseManagement_V1.Application.ApplicationTypes;
+using DrivingLicenseManagement_V1.People;
+using DrivingLicenseManagement_V1.Test;
 using DrivingLicenseManagement_V1.Users;
 using System;
 using System.Collections.Generic;
@@ -6,8 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DrivingLicenseManagement_V1
-{
+
     internal static class Program
     {
         /// <summary>
@@ -18,7 +19,6 @@ namespace DrivingLicenseManagement_V1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Frm_List());
+            Application.Run(new FRM_ListTesTypes());
         }
     }
-}

@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cls-Application-Types.cs" />
     <Compile Include="Cls-Countries.cs" />
     <Compile Include="Cls-People.cs" />
+    <Compile Include="Cls-TestTypes.cs" />
     <Compile Include="Cls-Users.cs" />
     <Compile Include="Cls_Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,6 +54,9 @@
       <Project>{00652fee-8de4-4a10-b2fd-c5ad9f991a6a}</Project>
       <Name>DATA-TIER</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
