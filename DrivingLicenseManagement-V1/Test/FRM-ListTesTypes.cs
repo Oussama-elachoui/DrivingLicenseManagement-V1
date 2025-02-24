@@ -45,7 +45,7 @@ namespace DrivingLicenseManagement_V1.Test
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
            Frm_UpdateTestTypescs frm = new Frm_UpdateTestTypescs(Convert.ToInt32((int)dgvTestTypes.SelectedRows[0].Cells[0].Value));
-            frm.ShowDialog(
+            frm.ShowDialog();
             _refresh();
         }
 
