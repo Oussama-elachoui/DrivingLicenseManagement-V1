@@ -58,6 +58,42 @@
     <Compile Include="Application\ApplicationTypes\Update.Designer.cs">
       <DependentUpon>Update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Application\Controls\ApplicationInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Application\Controls\ApplicationInfo.Designer.cs">
+      <DependentUpon>ApplicationInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Application\FRM-APP\frm-appInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Application\FRM-APP\frm-appInfo.Designer.cs">
+      <DependentUpon>frm-appInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Application\LOCALDRIVING.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Application\LOCALDRIVING.Designer.cs">
+      <DependentUpon>LOCALDRIVING.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Application\LocalDrivingLisence\Controls\LocalDrivingApplication.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Application\LocalDrivingLisence\Controls\LocalDrivingApplication.Designer.cs">
+      <DependentUpon>LocalDrivingApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Application\LocalDrivingLisence\Frm-ADDUPDATE-LDL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Application\LocalDrivingLisence\Frm-ADDUPDATE-LDL.Designer.cs">
+      <DependentUpon>Frm-ADDUPDATE-LDL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Application\LocalDrivingLisence\Frm-LDLLISTE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Application\LocalDrivingLisence\Frm-LDLLISTE.Designer.cs">
+      <DependentUpon>Frm-LDLLISTE.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,6 +185,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Application\ApplicationTypes\Update.resx">
       <DependentUpon>Update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Application\Controls\ApplicationInfo.resx">
+      <DependentUpon>ApplicationInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Application\FRM-APP\frm-appInfo.resx">
+      <DependentUpon>frm-appInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Application\LOCALDRIVING.resx">
+      <DependentUpon>LOCALDRIVING.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Application\LocalDrivingLisence\Controls\LocalDrivingApplication.resx">
+      <DependentUpon>LocalDrivingApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Application\LocalDrivingLisence\Frm-ADDUPDATE-LDL.resx">
+      <DependentUpon>Frm-ADDUPDATE-LDL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Application\LocalDrivingLisence\Frm-LDLLISTE.resx">
+      <DependentUpon>Frm-LDLLISTE.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="People\ControlsPeople\Ctrl-InfoPeersonByfilter.resx">
       <DependentUpon>Ctrl-InfoPeersonByfilter.cs</DependentUpon>
@@ -563,5 +617,6 @@
   <ItemGroup>
     <None Include="Resources\Written Test 512.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

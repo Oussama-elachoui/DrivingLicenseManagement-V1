@@ -18,11 +18,32 @@ namespace Logic_TIER
         public decimal PaidFees { get; set; }
 
         public int CreatedByUserID { get; set; }
+        public enum enApplicationStatus { New = 1, Cancelled = 2, Completed = 3 };
+
+        public string StatusText
+        {
+            get
+            {
+                 
+                switch (ApplicationStatus)
+                {
+                    case 1:
+                        return "New";
+                    case 2:
+                        return "Cancelled";
+                    case 3:
+                        return "Completed";
+                    default:
+                        return "Unknown";
+                }
+            }
+
+        }
 
         protected enum enmode
         {
-            Add=0,
-            Update=1
+            Add = 0,
+            Update = 1
         }
         protected enmode _enmodeAPP = enmode.Add;
 
@@ -57,22 +78,10 @@ namespace Logic_TIER
         
         private bool _AddNewAPP()
         {
-            try
-            {
+
                 this.APPLICATIONID = DATA_TIER.SQL_APPLICATION.ADD_APPLICATION(this.PersonID, this.ApplicationDate, this.ApplicationTypeID, this.ApplicationStatus, this.LastStatusDate, this.PaidFees, this.CreatedByUserID);
-                if (APPLICATIONID > 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+                return (this.APPLICATIONID != -1);
+
         }
         private bool Updatte()
         {
@@ -80,14 +89,17 @@ namespace Logic_TIER
             return DATA_TIER.SQL_APPLICATION.UPDATE_APPLICATION(this.APPLICATIONID, this.PersonID, this.ApplicationDate, this.ApplicationTypeID, this.ApplicationStatus, this.LastStatusDate, this.PaidFees, this.CreatedByUserID);
         }
 
-
-        public static bool Delete(int APPLICATIONID)
+        public bool Delete()
+        {
+            return DeleteS(this.APPLICATIONID);
+        }
+        public static bool DeleteS(int APPLICATIONID)
         {
             return DATA_TIER.SQL_APPLICATION.DELETE_APPLICATION(APPLICATIONID);
         }
         public bool SaveAPPLICATION()
         {
-            switch (_enmodeAPP)
+            switch (this._enmodeAPP)
             {
                 case enmode.Add:
                     if (_AddNewAPP())
@@ -117,7 +129,7 @@ namespace Logic_TIER
             DateTime ApplicationDate = DateTime.Now, LastStatusDate = DateTime.Now;
             decimal PaidFees = 0;
 
-            bool IsFound = DATA_TIER.SQL_APPLICATION.FindByApplicationID(APPLICATIONID, ref Personid, ref ApplicationDate, ref ApplicationTypeID, ref ApplicationStatus, ref LastStatusDate, ref PaidFees, ref CreatedByUserID);
+            bool IsFound = DATA_TIER.SQL_APPLICATION.FindByApplicationID(APPLICATIONID,ref Personid,ref ApplicationDate,ref ApplicationTypeID,ref ApplicationStatus,ref LastStatusDate,ref PaidFees,ref CreatedByUserID);
             if (IsFound)
             {
                 return new Cls_APPLICATION(APPLICATIONID, Personid, ApplicationDate, ApplicationTypeID, ApplicationStatus, LastStatusDate, PaidFees, CreatedByUserID);

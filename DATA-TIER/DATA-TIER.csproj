@@ -44,6 +44,7 @@
     <Compile Include="SQL-APPLICATION-TYPES.cs" />
     <Compile Include="SQL-APPLICATION.cs" />
     <Compile Include="SQL-Countries.cs" />
+    <Compile Include="SQL-LICENCECLASSES.cs" />
     <Compile Include="SQL-LOCALDRIVINGLISENCE.cs" />
     <Compile Include="SQL-PEOPLE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,18 +11,20 @@ namespace Logic_TIER
 {
     public class Cls_LocaldrivngLisence : Cls_APPLICATION
     {
+        public enum enMode { AddNew = 0, Update = 1 };
+        public enMode Mode = enMode.AddNew;
         public int LOCALDRIVINGLISENCEID { get; set; }
-        public int ApplicationID { get; set; }
         public int LicenseClassID { get; set; }
+
+        public CLS_LICENCECLASSES LICENCECLASSESInfo { get; set; }
 
 
 
         public Cls_LocaldrivngLisence(int APPLICATIONID, int PersonID, DateTime ApplicationDate, int ApplicationTypeID, byte ApplicationStatus, DateTime LastStatusDate, decimal PaidFees, int CreatedByUserID, int LOCALDRIVINGLISENCEID, int ApplicationID, int LicenseClassID)
         {
             this.LOCALDRIVINGLISENCEID = LOCALDRIVINGLISENCEID;
-            this.ApplicationID = ApplicationID;
+            this.APPLICATIONID = ApplicationID;
             this.LicenseClassID = LicenseClassID;
-            this.APPLICATIONID = APPLICATIONID;
             this.PersonID = PersonID;
             this.ApplicationDate = ApplicationDate;
             this.ApplicationTypeID = ApplicationTypeID;
@@ -30,25 +32,16 @@ namespace Logic_TIER
             this.LastStatusDate = LastStatusDate;
             this.PaidFees = PaidFees;
             this.CreatedByUserID = CreatedByUserID;
-            this._enmodeAPP= enmode.Update;
+            Mode = enMode.Update;
+            this.LICENCECLASSESInfo = CLS_LICENCECLASSES.Find(LicenseClassID);
         }
 
         public Cls_LocaldrivngLisence()
         {
 
             this.LOCALDRIVINGLISENCEID = -1;
-            this.ApplicationID = -1;
             this.LicenseClassID = -1;
-            this.APPLICATIONID = -1;
-            this.PersonID = -1;
-            this.ApplicationDate = DateTime.Now;
-            this.ApplicationTypeID = -1;
-            this.ApplicationStatus = 0;
-            this.LastStatusDate = DateTime.Now;
-            this.PaidFees = 0;
-            this.CreatedByUserID = -1;
-
-            this._enmodeAPP = enmode.Update;
+            Mode = enMode.AddNew;
 
         }
 
@@ -80,57 +73,105 @@ namespace Logic_TIER
 
         }
 
+        public byte NumberTestLocked()
+        {
+            return NumberTestLockedS(this.LOCALDRIVINGLISENCEID);
+
+        }
+        public static byte NumberTestLockedS(int LocalDrivingID)
+        {
+            return SQL_LOCALDRIVINGLISENCE.GetPassedTestCount(LocalDrivingID);
+
+        }
         private bool _AddNewAPP()
         {
-
-            int Id = SQL_LOCALDRIVINGLISENCE.ADD_LOCALDRIVINGLISENCE(this.APPLICATIONID, LicenseClassID);
-            if (Id != -1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            this.LOCALDRIVINGLISENCEID = SQL_LOCALDRIVINGLISENCE.ADD_LOCALDRIVINGLISENCE(this.APPLICATIONID, LicenseClassID);
+            return (this.LOCALDRIVINGLISENCEID != -1);
 
         }
         private bool _UpdateAPP()
         {
-            return SQL_LOCALDRIVINGLISENCE.UPDATE_LOCALDRIVINGLISENCE(this.LOCALDRIVINGLISENCEID, this.ApplicationID, this.LicenseClassID);
+            return SQL_LOCALDRIVINGLISENCE.UPDATE_LOCALDRIVINGLISENCE(this.LOCALDRIVINGLISENCEID, this.APPLICATIONID, this.LicenseClassID);
         }
 
         public bool Save()
         {
-            switch (this._enmodeAPP)
-            {
-                case enmode.Add:
-                    if (this.SaveAPPLICATION())
-                    {
-                        if (_AddNewAPP())
-                        {
-                            _enmodeAPP = enmode.Update;
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
+            base._enmodeAPP = (Cls_APPLICATION.enmode)Mode;
+            if(!base.SaveAPPLICATION())
+                return false;
 
+            switch (Mode)
+            {
+                case enMode.AddNew:
+                    if (_AddNewAPP())
+                    {
+
+                        Mode = enMode.Update;
+                        return true;
                     }
                     else
                     {
                         return false;
                     }
-                case enmode.Update:
-                    return this.SaveAPPLICATION() & _UpdateAPP();
-                default:
-                    return false;
+
+                case enMode.Update:
+
+                    return _UpdateAPP();
+
             }
+
+            return false;
+
         }
 
         public static DataTable Getall()
         {
             return SQL_LOCALDRIVINGLISENCE.GETALL();
         }
+
+        private static bool delete(int ID)
+        {
+            return SQL_LOCALDRIVINGLISENCE.delete(ID);
+        }
+
+        public  bool DeleteAll()
+        {
+            bool IsDeleted_LocalDrivingID = false;
+            bool IsDeleted_ApplicationID = false;
+
+            IsDeleted_LocalDrivingID  = Cls_LocaldrivngLisence.delete(this.LOCALDRIVINGLISENCEID);
+
+            if (!IsDeleted_LocalDrivingID)
+            {
+                return false;
+            }
+
+           IsDeleted_ApplicationID = base.Delete();
+
+            return IsDeleted_ApplicationID;
+
+
+
+        }
+        public bool Cancelled()
+        {
+            return StaticCancelled(this.LOCALDRIVINGLISENCEID);
+        }
+
+        public static bool StaticCancelled(int ID)
+        {
+            return SQL_LOCALDRIVINGLISENCE.Cancelled(ID);
+        }
+
+        public bool CheckIfPersonHasDemandeLocalDrivingLicenseBefore(int ApplicationID, int Types)
+        {
+            return SQL_LOCALDRIVINGLISENCE.CheckIfPersonHasDemandeLocalDrivingLicenseBefore(this.APPLICATIONID, this.ApplicationTypeID);
+        }
+        public static bool CheckIfPersonHasDemandeLocalDrivingLicenseBefore_Static(int ApplicationID, int Types)
+        {
+            return SQL_LOCALDRIVINGLISENCE.CheckIfPersonHasDemandeLocalDrivingLicenseBefore(ApplicationID, Types);
+        }
+
+
     }
 }

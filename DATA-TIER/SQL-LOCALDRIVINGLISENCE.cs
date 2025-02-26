@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -15,7 +17,7 @@ namespace DATA_TIER
             int personId = -1;
             SqlConnection sqlConnection = new SqlConnection(StringConnection.connectionString);
             string query = @"
-                             INSERT INTO LOCALDRIVINGLISENCE 
+                             INSERT INTO LocalDrivingLicenseApplications 
                                  (ApplicationID, LicenseClassID) 
                                  VALUES 
                                        (@ApplicationID, @LicenseClassID);
@@ -26,6 +28,7 @@ namespace DATA_TIER
             sqlCommand.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
             try
             {
+                sqlConnection.Open();
                 object result = sqlCommand.ExecuteScalar();
                 if (result != null && int.TryParse(result.ToString(), out int ID))
                 {
@@ -51,29 +54,31 @@ namespace DATA_TIER
         }
         public static bool UPDATE_LOCALDRIVINGLISENCE(int LOCALDRIVINGLISENCEID, int ApplicationID, int LicenseClassID)
         {
+            int rowsAffected = 0;
             SqlConnection sqlConnection = new SqlConnection(StringConnection.connectionString);
             string query = @"
-                             UPDATE LOCALDRIVINGLISENCE 
+                             UPDATE LocalDrivingLicenseApplications 
                                  SET ApplicationID = @ApplicationID, LicenseClassID = @LicenseClassID
-                                 WHERE LOCALDRIVINGLISENCEID = @LOCALDRIVINGLISENCEID";
+                                 WHERE LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID";
             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
-            sqlCommand.Parameters.AddWithValue("@LOCALDRIVINGLISENCEID", LOCALDRIVINGLISENCEID);
+            sqlCommand.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LOCALDRIVINGLISENCEID);
             sqlCommand.Parameters.AddWithValue("@ApplicationID", ApplicationID);
             sqlCommand.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
             try
             {
-                sqlCommand.ExecuteNonQuery();
-                return true;
+                sqlConnection.Open();
+                rowsAffected=sqlCommand.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
-                return false;
+
             }
             finally
             {
                 sqlConnection.Close();
             }
+            return rowsAffected > 0;
         }
 
         public static bool delete(int ID)
@@ -102,30 +107,111 @@ namespace DATA_TIER
             }
         }
 
-        public static bool FindByid(int ID, ref int ApplicationID, ref int LicenseClassID)
+        public static bool FindByid(
+            int LocalDrivingLicenseApplicationID, ref int ApplicationID,
+            ref int LicenseClassID)
         {
-            SqlConnection sqlConnection = new SqlConnection(StringConnection.connectionString);
-            string query = @"
-                             SELECT * FROM LOCALDRIVINGLISENCE 
-                                 WHERE LOCALDRIVINGLISENCEID = @ID";
-            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+            bool isFound = false;
 
-            sqlCommand.Parameters.AddWithValue("@ID", ID);
+            SqlConnection sqlConnection = new SqlConnection(StringConnection.connectionString);
+
+
+            string query = "SELECT * FROM LocalDrivingLicenseApplications WHERE LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID";
+
+            SqlCommand command = new SqlCommand(query, sqlConnection);
+
+            command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+
             try
             {
                 sqlConnection.Open();
-                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-                if (sqlDataReader.Read())
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
                 {
-                    ApplicationID = Convert.ToInt32(sqlDataReader["ApplicationID"]);
-                    LicenseClassID = Convert.ToInt32(sqlDataReader["LicenseClassID"]);
-                    return true;
+
+                    // The record was found
+                    isFound = true;
+
+                    ApplicationID = (int)reader["ApplicationID"];
+                    LicenseClassID = (int)reader["LicenseClassID"];
+
+
+
                 }
                 else
                 {
-                    return false;
+                    // The record was not found
+                    isFound = false;
                 }
-                sqlDataReader.Close();
+
+                reader.Close();
+
+
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine("Error: " + ex.Message);
+                isFound = false;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+            return isFound;
+        }
+        public static DataTable GETALL()
+        {
+            DataTable dt = new DataTable();
+
+            SqlConnection sqlConnection = new SqlConnection(StringConnection.connectionString);
+            string query = @"
+                             select * from LocalDrivingLicenseApplications_View";
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+            try
+            {
+                sqlConnection.Open();
+                SqlDataReader Reader = sqlCommand.ExecuteReader();
+                if (Reader.Read())
+                {
+                    dt.Load(Reader);
+                }
+                Reader.Close();
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+            return dt;
+        }
+
+        public static bool CheckIfPersonHasDemandeLocalDrivingLicenseBefore(int PersonID,int Types)
+        {
+            bool isFound = false;
+
+            SqlConnection sqlConnection = new SqlConnection(StringConnection.connectionString);
+            string query = @"
+                             select Applications.ApplicantPersonID , LocalDrivingLicenseApplications.LicenseClassID from Applications inner join LocalDrivingLicenseApplications on Applications.ApplicationID=LocalDrivingLicenseApplications.ApplicationID where Applications.ApplicantPersonID = @ApplicantPersonID and LocalDrivingLicenseApplications.LicenseClassID=@LicenseClassID";
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@ApplicantPersonID", PersonID);
+            sqlCommand.Parameters.AddWithValue("@LicenseClassID", Types);
+
+            try
+            {
+                sqlConnection.Open();
+                SqlDataReader Reader = sqlCommand.ExecuteReader();
+                if (Reader.Read())
+                {
+                    isFound = true;
+                }
+                Reader.Close();
+
             }
             catch (Exception ex)
             {
@@ -136,30 +222,82 @@ namespace DATA_TIER
                 sqlConnection.Close();
             }
 
-            return false;
+            return isFound;
         }
 
-        public static DataTable GETALL()
-        {
 
+        public static byte GetPassedTestCount(int LocalDrivingLicenseApplicationID)
+        {
+            byte PassedTestCount = 0;
+
+            SqlConnection connection = new SqlConnection(StringConnection.connectionString);
+
+            string query = @"SELECT PassedTestCount = count(TestTypeID)
+                         FROM Tests INNER JOIN
+                         TestAppointments ON Tests.TestAppointmentID = TestAppointments.TestAppointmentID
+						 where LocalDrivingLicenseApplicationID =@LocalDrivingLicenseApplicationID and TestResult=1";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if (result != null && byte.TryParse(result.ToString(), out byte ptCount))
+                {
+                    PassedTestCount = ptCount;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                //Console.WriteLine("Error: " + ex.Message);
+
+            }
+
+            finally
+            {
+                connection.Close();
+            }
+
+            return PassedTestCount;
+
+
+
+        }
+
+        public static bool Cancelled(int LocalId)
+        {
+            int rowsAffected = 0;
             SqlConnection sqlConnection = new SqlConnection(StringConnection.connectionString);
             string query = @"
-                             LocalDrivingLicenseApplications_View";
+                             update Applications set Applications.ApplicationStatus=2 from Applications inner join LocalDrivingLicenseApplications on Applications.ApplicationID=LocalDrivingLicenseApplications.ApplicationID 
+                             where LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID=@LocalDrivingLicenseApplicationID";
             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-            DataTable dataTable = new DataTable();
+
+            sqlCommand.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalId);
+
+
             try
             {
                 sqlConnection.Open();
-                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-                dataTable.Load(sqlDataReader);
-                return dataTable;
+                rowsAffected = sqlCommand.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
-                return null;
+                return false;
             }
             finally
             {
                 sqlConnection.Close();
+
             }
+            return rowsAffected > 0;
+        }
+    }
 }

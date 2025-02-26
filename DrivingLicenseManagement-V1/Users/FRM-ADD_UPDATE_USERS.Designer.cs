@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tcUserInfo = new System.Windows.Forms.TabControl();
             this.tpPersonalInfo = new System.Windows.Forms.TabPage();
+            this.ctrl_InfoPeersonByfilter1 = new DrivingLicenseManagement_V1.People.ControlsPeople.Ctrl_InfoPeersonByfilter();
             this.btnPersonInfoNext = new System.Windows.Forms.Button();
             this.tpLoginInfo = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -50,7 +51,6 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.ctrl_InfoPeersonByfilter1 = new DrivingLicenseManagement_V1.People.ControlsPeople.Ctrl_InfoPeersonByfilter();
             this.tcUserInfo.SuspendLayout();
             this.tpPersonalInfo.SuspendLayout();
             this.tpLoginInfo.SuspendLayout();
@@ -82,6 +82,15 @@
             this.tpPersonalInfo.TabIndex = 0;
             this.tpPersonalInfo.Text = "Personal Info";
             this.tpPersonalInfo.UseVisualStyleBackColor = true;
+            // 
+            // ctrl_InfoPeersonByfilter1
+            // 
+            this.ctrl_InfoPeersonByfilter1.FilterEnabled = true;
+            this.ctrl_InfoPeersonByfilter1.Location = new System.Drawing.Point(6, 6);
+            this.ctrl_InfoPeersonByfilter1.Name = "ctrl_InfoPeersonByfilter1";
+            this.ctrl_InfoPeersonByfilter1.ShowAddPerson = true;
+            this.ctrl_InfoPeersonByfilter1.Size = new System.Drawing.Size(846, 414);
+            this.ctrl_InfoPeersonByfilter1.TabIndex = 120;
             // 
             // btnPersonInfoNext
             // 
@@ -299,15 +308,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // ctrl_InfoPeersonByfilter1
-            // 
-            this.ctrl_InfoPeersonByfilter1.FilterEnabled = true;
-            this.ctrl_InfoPeersonByfilter1.Location = new System.Drawing.Point(6, 6);
-            this.ctrl_InfoPeersonByfilter1.Name = "ctrl_InfoPeersonByfilter1";
-            this.ctrl_InfoPeersonByfilter1.ShowAddPerson = true;
-            this.ctrl_InfoPeersonByfilter1.Size = new System.Drawing.Size(846, 414);
-            this.ctrl_InfoPeersonByfilter1.TabIndex = 120;
             // 
             // FRM_ADD_UPDATE_USERS
             // 
