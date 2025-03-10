@@ -48,6 +48,7 @@
     <Compile Include="SQL-LOCALDRIVINGLISENCE.cs" />
     <Compile Include="SQL-PEOPLE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQL-TestAppointement.cs" />
     <Compile Include="SQL-TestTypes.cs" />
     <Compile Include="Sql-Users.cs" />
     <Compile Include="StringConnection.cs" />

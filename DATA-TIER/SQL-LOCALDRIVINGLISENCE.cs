@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -299,5 +300,121 @@ namespace DATA_TIER
             }
             return rowsAffected > 0;
         }
+
+        public static bool DoesAttendByTest(int localId, int testType)
+        {
+            bool isFound = false;
+
+            using (SqlConnection sqlConnection = new SqlConnection(StringConnection.connectionString))
+            {
+                string query = @"
+            SELECT TestAppointments.LocalDrivingLicenseApplicationID, TestAppointments.TestAppointmentID 
+            FROM TestAppointments 
+            INNER JOIN Tests 
+            ON Tests.TestAppointmentID = TestAppointments.TestAppointmentID 
+            WHERE TestAppointments.LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID 
+            AND TestAppointments.TestTypeID = @TestTypeID
+            AND Tests.TestResult = 1";
+
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                {
+                    sqlCommand.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", localId);
+                    sqlCommand.Parameters.AddWithValue("@TestTypeID", testType);
+
+                    try
+                    {
+                        sqlConnection.Open();
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                isFound = true;
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return isFound;
+        }
+
+        public static bool DoesattendBytest(int localId,int testtype)
+        {
+            bool isFound = false;
+
+            SqlConnection sqlConnection = new SqlConnection(StringConnection.connectionString);
+            string query = @"
+                             select * from TestAppointments where LocalDrivingLicenseApplicationID=@LocalDrivingLicenseApplicationID and TestTypeID=@TestTypeID";
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", localId);
+            sqlCommand.Parameters.AddWithValue("@TestTypeID", testtype);
+
+            try
+            {
+                sqlConnection.Open();
+                SqlDataReader Reader = sqlCommand.ExecuteReader();
+                if (Reader.Read())
+                {
+                    isFound = true;
+                }
+                Reader.Close();
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+            return isFound;
+        }
+        public static bool DoesAttendTestSucced(int localId, int testType)
+        {
+            bool isFound = false;
+
+            using (SqlConnection sqlConnection = new SqlConnection(StringConnection.connectionString))
+            {
+                string query = @"
+            SELECT TestAppointments.LocalDrivingLicenseApplicationID, TestAppointments.TestAppointmentID 
+            FROM TestAppointments 
+            INNER JOIN Tests 
+            ON Tests.TestAppointmentID = TestAppointments.TestAppointmentID 
+            WHERE TestAppointments.LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID 
+            AND TestAppointments.TestTypeID = @TestTypeID
+            AND Tests.TestResult = 0";
+
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                {
+                    sqlCommand.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", localId);
+                    sqlCommand.Parameters.AddWithValue("@TestTypeID", testType);
+
+                    try
+                    {
+                        sqlConnection.Open();
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                isFound = true;
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return isFound;
+        }
+
     }
 }

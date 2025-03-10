@@ -1,4 +1,5 @@
 ﻿using DrivingLicenseManagement_V1.Application.FRM_APP;
+using DrivingLicenseManagement_V1.Test;
 using Logic_TIER;
 using System;
 using System.Collections.Generic;
@@ -177,7 +178,7 @@ namespace DrivingLicenseManagement_V1.Application.LocalDrivingLisence
 
         private void aDDToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            Frm_ADDUPDATE_LDL lc = new Frm_ADDUPDATE_LDL();
+            Frm_ADDUPDATE_LDL lc = new Frm_ADDUPDATE_LDL((int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
             lc.ShowDialog();
             _refresh();
 
@@ -196,6 +197,72 @@ namespace DrivingLicenseManagement_V1.Application.LocalDrivingLisence
             Frm_ADDUPDATE_LDL lc = new Frm_ADDUPDATE_LDL();
             lc.ShowDialog();
             _refresh();
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+            int localDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
+
+            Cls_LocaldrivngLisence LocaldrivngLisenceInfo = Cls_LocaldrivngLisence.Find(localDrivingLicenseApplicationID);
+
+
+            //Total Passed Tests
+            int TotalPassedTests = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[5].Value;
+
+            //bool LicenseExists = LocalDrivingLicenseApplication.IsLicenseIssued();
+
+            ////Enabled only if person passed all tests and Does not have license. 
+            //issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = (TotalPassedTests == 3) && !LicenseExists;
+
+            //showLicenseToolStripMenuItem.Enabled = LicenseExists;
+
+            //Enabled only if application is not cancelled
+            bool IsNew = LocaldrivngLisenceInfo.ApplicationStatus == 1;
+            eDITToolStripMenuItem.Enabled = IsNew;
+            dELETEToolStripMenuItem.Enabled = IsNew;
+            iNFIToolStripMenuItem.Enabled = IsNew;
+
+            bool PassedVisionTest = LocaldrivngLisenceInfo.DoesAttendBytestSucced(1); 
+            bool PassedWrittenTest = LocaldrivngLisenceInfo.DoesAttendBytestSucced(2);
+            bool PassedStreetTest = LocaldrivngLisenceInfo.DoesAttendBytestSucced(3);
+
+            sechduleTestToolStripMenuItem.Enabled = (!PassedVisionTest || !PassedWrittenTest || !PassedStreetTest) && (LocaldrivngLisenceInfo.ApplicationStatus == 1);
+
+            if (sechduleTestToolStripMenuItem.Enabled)
+            {
+                //To Allow Schdule vision test, Person must not passed the same test before.
+                scheduleVisionTestToolStripMenuItem.Enabled = !PassedVisionTest;
+
+                //To Allow Schdule written test, Person must pass the vision test and must not passed the same test before.
+                scheduleWrittenTestToolStripMenuItem.Enabled = PassedVisionTest && !PassedWrittenTest;
+
+                //To Allow Schdule steet test, Person must pass the vision * written tests, and must not passed the same test before.
+                scheduleStreetTestToolStripMenuItem.Enabled = PassedVisionTest && PassedWrittenTest && !PassedStreetTest;
+
+            }
+
+
+
+
+        }
+
+        private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FRM_LISTTESTAPPOINTEMENT frm = new FRM_LISTTESTAPPOINTEMENT(1, (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
+            frm.ShowDialog();
+        }
+
+        private void scheduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FRM_LISTTESTAPPOINTEMENT frm = new FRM_LISTTESTAPPOINTEMENT(2, (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
+            frm.ShowDialog();
+        }
+
+        private void scheduleStreetTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FRM_LISTTESTAPPOINTEMENT frm = new FRM_LISTTESTAPPOINTEMENT(3, (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
+            frm.ShowDialog();
         }
     }
 }

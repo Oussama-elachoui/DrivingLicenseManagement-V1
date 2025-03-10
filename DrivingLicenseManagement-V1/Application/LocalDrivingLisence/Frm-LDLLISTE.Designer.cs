@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnAddNewApplication = new System.Windows.Forms.Button();
             this.pbPersonImage = new System.Windows.Forms.PictureBox();
@@ -40,12 +40,16 @@
             this.lblRecordsCount = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvLocalDrivingLicenseApplications = new System.Windows.Forms.DataGridView();
-            this.btnClose = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.aDDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eDITToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dELETEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iNFIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.sechduleTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scheduleVisionTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scheduleWrittenTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scheduleStreetTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLocalDrivingLicenseApplications)).BeginInit();
@@ -168,32 +172,18 @@
             this.dgvLocalDrivingLicenseApplications.MultiSelect = false;
             this.dgvLocalDrivingLicenseApplications.Name = "dgvLocalDrivingLicenseApplications";
             this.dgvLocalDrivingLicenseApplications.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLocalDrivingLicenseApplications.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLocalDrivingLicenseApplications.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvLocalDrivingLicenseApplications.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLocalDrivingLicenseApplications.Size = new System.Drawing.Size(1405, 353);
             this.dgvLocalDrivingLicenseApplications.TabIndex = 132;
             this.dgvLocalDrivingLicenseApplications.TabStop = false;
-            // 
-            // btnClose
-            // 
-            this.btnClose.AutoEllipsis = true;
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(1283, 698);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(135, 36);
-            this.btnClose.TabIndex = 131;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // contextMenuStrip1
             // 
@@ -201,9 +191,11 @@
             this.aDDToolStripMenuItem,
             this.eDITToolStripMenuItem,
             this.dELETEToolStripMenuItem,
-            this.iNFIToolStripMenuItem});
+            this.iNFIToolStripMenuItem,
+            this.sechduleTestToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(209, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(209, 136);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // aDDToolStripMenuItem
             // 
@@ -236,6 +228,55 @@
             this.iNFIToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.iNFIToolStripMenuItem.Text = "Cancel";
             this.iNFIToolStripMenuItem.Click += new System.EventHandler(this.iNFIToolStripMenuItem_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.AutoEllipsis = true;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClose.Location = new System.Drawing.Point(1283, 698);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(135, 36);
+            this.btnClose.TabIndex = 131;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // sechduleTestToolStripMenuItem
+            // 
+            this.sechduleTestToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.scheduleVisionTestToolStripMenuItem,
+            this.scheduleWrittenTestToolStripMenuItem,
+            this.scheduleStreetTestToolStripMenuItem});
+            this.sechduleTestToolStripMenuItem.Image = global::DrivingLicenseManagement_V1.Properties.Resources.Schedule_Test_32;
+            this.sechduleTestToolStripMenuItem.Name = "sechduleTestToolStripMenuItem";
+            this.sechduleTestToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.sechduleTestToolStripMenuItem.Text = "Sechdule &Tests";
+            // 
+            // scheduleVisionTestToolStripMenuItem
+            // 
+            this.scheduleVisionTestToolStripMenuItem.Image = global::DrivingLicenseManagement_V1.Properties.Resources.Vision_Test_32;
+            this.scheduleVisionTestToolStripMenuItem.Name = "scheduleVisionTestToolStripMenuItem";
+            this.scheduleVisionTestToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.scheduleVisionTestToolStripMenuItem.Text = "Schedule Vision Test";
+            this.scheduleVisionTestToolStripMenuItem.Click += new System.EventHandler(this.scheduleVisionTestToolStripMenuItem_Click);
+            // 
+            // scheduleWrittenTestToolStripMenuItem
+            // 
+            this.scheduleWrittenTestToolStripMenuItem.Image = global::DrivingLicenseManagement_V1.Properties.Resources.Written_Test_32;
+            this.scheduleWrittenTestToolStripMenuItem.Name = "scheduleWrittenTestToolStripMenuItem";
+            this.scheduleWrittenTestToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.scheduleWrittenTestToolStripMenuItem.Text = "Schedule Written Test";
+            this.scheduleWrittenTestToolStripMenuItem.Click += new System.EventHandler(this.scheduleWrittenTestToolStripMenuItem_Click);
+            // 
+            // scheduleStreetTestToolStripMenuItem
+            // 
+            this.scheduleStreetTestToolStripMenuItem.Image = global::DrivingLicenseManagement_V1.Properties.Resources.Street_Test_32;
+            this.scheduleStreetTestToolStripMenuItem.Name = "scheduleStreetTestToolStripMenuItem";
+            this.scheduleStreetTestToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.scheduleStreetTestToolStripMenuItem.Text = "Schedule StreetTest";
+            this.scheduleStreetTestToolStripMenuItem.Click += new System.EventHandler(this.scheduleStreetTestToolStripMenuItem_Click);
             // 
             // Frm_LDLLISTE
             // 
@@ -283,5 +324,9 @@
         private System.Windows.Forms.ToolStripMenuItem eDITToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dELETEToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iNFIToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sechduleTestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem scheduleVisionTestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem scheduleWrittenTestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem scheduleStreetTestToolStripMenuItem;
     }
 }

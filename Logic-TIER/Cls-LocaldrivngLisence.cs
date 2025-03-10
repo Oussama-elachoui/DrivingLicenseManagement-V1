@@ -172,6 +172,25 @@ namespace Logic_TIER
             return SQL_LOCALDRIVINGLISENCE.CheckIfPersonHasDemandeLocalDrivingLicenseBefore(ApplicationID, Types);
         }
 
+        public static bool DoesAttendBytestS(int LocalID,int testType)
+        {
+            return SQL_LOCALDRIVINGLISENCE.DoesattendBytest(LocalID, testType);
+        }
+
+        public  bool DoesAttendBytest(int LocalID)
+        {
+            return DoesAttendBytestS(this.LOCALDRIVINGLISENCEID,LocalID);
+        }
+
+        public static bool DoesAttendBytestSucced(int LocalID, int testtype)
+        {
+            return SQL_LOCALDRIVINGLISENCE.DoesAttendTestSucced(LocalID, testtype);
+        }
+        
+        public bool DoesAttendBytestSucced(int TestType)
+        {
+            return DoesAttendBytestSucced(this.LOCALDRIVINGLISENCEID,TestType);
+        }
 
     }
 }
