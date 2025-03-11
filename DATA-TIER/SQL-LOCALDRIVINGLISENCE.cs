@@ -388,7 +388,7 @@ namespace DATA_TIER
             ON Tests.TestAppointmentID = TestAppointments.TestAppointmentID 
             WHERE TestAppointments.LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID 
             AND TestAppointments.TestTypeID = @TestTypeID
-            AND Tests.TestResult = 0";
+            AND Tests.TestResult = 1";
 
                 using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {

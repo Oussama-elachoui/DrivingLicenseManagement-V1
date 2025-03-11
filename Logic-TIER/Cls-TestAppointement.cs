@@ -110,6 +110,16 @@ namespace Logic_TIER
 
         }
 
+        public static int GetTestID(int TestAppointmentID)
+        {
+            return SQL_TestAppointement.GetTestID(TestAppointmentID);
+        }
+
+        public int GetTestID()
+        {
+            return GetTestID(this.TestAppointmentID);
+        }
+
         public  DataTable GetApplicationTestAppointments(int TestTypeID)
         {
             return GetApplicationTestAppointmentsPerTestType(this.LocalDrivingLicenseApplicationID, TestTypeID);

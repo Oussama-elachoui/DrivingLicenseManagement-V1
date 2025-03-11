@@ -162,6 +162,12 @@
     <Compile Include="Test\Frm-scheduleTest.Designer.cs">
       <DependentUpon>Frm-scheduleTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Test\FRM-TakeATest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\FRM-TakeATest.Designer.cs">
+      <DependentUpon>FRM-TakeATest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Test\Frm-UpdateTestTypescs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -261,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Test\Frm-scheduleTest.resx">
       <DependentUpon>Frm-scheduleTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\FRM-TakeATest.resx">
+      <DependentUpon>FRM-TakeATest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Test\Frm-UpdateTestTypescs.resx">
       <DependentUpon>Frm-UpdateTestTypescs.cs</DependentUpon>

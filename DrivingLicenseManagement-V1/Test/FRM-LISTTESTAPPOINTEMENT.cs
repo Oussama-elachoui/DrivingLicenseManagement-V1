@@ -70,6 +70,8 @@ namespace DrivingLicenseManagement_V1.Test
 
             Frm_scheduleTest frm_ScheduleTest = new Frm_scheduleTest(_LocalDrivingLicenseApplicationID, TestTypeID);
             frm_ScheduleTest.ShowDialog();
+            dgvLicenseTestAppointments.DataSource = Logic_TIER.Cls_TestAppointement.GetApplicationTestAppointmentsPerTestType(_LocalDrivingLicenseApplicationID, TestTypeID);
+
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -79,6 +81,31 @@ namespace DrivingLicenseManagement_V1.Test
 
             Frm_scheduleTest frm = new Frm_scheduleTest(_LocalDrivingLicenseApplicationID, TestTypeID, TestAppointmentID);
             frm.ShowDialog();
+            dgvLicenseTestAppointments.DataSource = Logic_TIER.Cls_TestAppointement.GetApplicationTestAppointmentsPerTestType(_LocalDrivingLicenseApplicationID, TestTypeID);
+
+        }
+
+        private void takeTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FRM_TakeATest frm = new FRM_TakeATest((int)dgvLicenseTestAppointments.CurrentRow.Cells[0].Value, TestTypeID);
+            frm.ShowDialog();
+            dgvLicenseTestAppointments.DataSource = Logic_TIER.Cls_TestAppointement.GetApplicationTestAppointmentsPerTestType(_LocalDrivingLicenseApplicationID, TestTypeID);
+
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            Cls_TestAppointement cls_TestAppointement = Cls_TestAppointement.Find((int)dgvLicenseTestAppointments.CurrentRow.Cells[0].Value);
+            bool isLocked = cls_TestAppointement.IsLocked;
+
+            if (isLocked)
+            {
+                takeTestToolStripMenuItem.Enabled = false;
+            }
+            else
+            {
+                takeTestToolStripMenuItem.Enabled = true;
+            }
         }
     }
 }

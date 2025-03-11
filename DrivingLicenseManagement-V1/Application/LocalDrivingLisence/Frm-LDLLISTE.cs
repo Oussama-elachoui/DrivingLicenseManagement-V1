@@ -251,18 +251,23 @@ namespace DrivingLicenseManagement_V1.Application.LocalDrivingLisence
         {
             FRM_LISTTESTAPPOINTEMENT frm = new FRM_LISTTESTAPPOINTEMENT(1, (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
             frm.ShowDialog();
+            _refresh();
         }
 
         private void scheduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FRM_LISTTESTAPPOINTEMENT frm = new FRM_LISTTESTAPPOINTEMENT(2, (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
             frm.ShowDialog();
+            _refresh();
+
         }
 
         private void scheduleStreetTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FRM_LISTTESTAPPOINTEMENT frm = new FRM_LISTTESTAPPOINTEMENT(3, (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
             frm.ShowDialog();
+            _refresh();
+
         }
     }
 }
